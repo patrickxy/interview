@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>this ->谁调用他,this就指向谁</li>
+    </ul>
+  </body>
+  <script>
+    // bind() 的实现，相当于使用函数在内部包了一个 call / apply ，第二次 bind() 相当于再包住第一次 bind() ,故第二次以后的 bind 是无法生效的。
+    this.x = 0
+    const bar = function() {
+      console.log(this.x)
+    }
+    let foo1 = { x: 1 }
+    let foo2 = { x: 2 }
+    let foo3 = { x: 3 }
+    bar.bind(foo1)()
+    bar.bind(foo1).bind(foo2)()
+    bar
+      .bind(foo1)
+      .bind(foo2)
+      .bind(foo3)()
+    //111
+  </script>
+</html>
