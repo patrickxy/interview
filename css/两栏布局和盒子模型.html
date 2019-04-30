@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>两栏响应布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100px;
+      }
+      .left {
+        float: left;
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+      }
+      .main {
+        background-color: tan;
+        margin-left: 200px;
+        height: 100%;
+      }
+      .container1 {
+        height: 100px;
+        display: flex;
+      }
+      .left1 {
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+      }
+      .main1 {
+        flex: 1;
+        background-color: tan;
+        height: 100%;
+      }
+      .container2 {
+        height: 100px;
+        position: relative;
+      }
+      .left2 {
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+        position: absolute;
+      }
+      .main2 {
+        margin-left: 200px;
+        background-color: tan;
+        height: 100%;
+      }
+      .container3 {
+        width: 100px;
+        padding: 20px;
+        border: solid 5px tan;
+        margin: 5px;
+      }
+      .container4 {
+        box-sizing: border-box;
+        width: 100px;
+        padding: 20px;
+        border: solid 5px tan;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="main"><h5>两栏布局</h5></div>
+    </div>
+    <div class="container1">
+      <div class="left1"></div>
+      <div class="main1"></div>
+    </div>
+    <div class="container2">
+      <div class="left2"></div>
+      <div class="main2"></div>
+    </div>
+    <div class="container3">width = 宽度+border+padding+margin</div>
+    <div class="container4">width=宽度 （padding和border会占据宽度）</div>
+  </body>
+</html>

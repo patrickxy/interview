@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>三栏响应布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100px;
+      }
+      .left {
+        float: left;
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+      }
+      .right {
+        float: right;
+        width: 200px;
+        background-color: coral;
+        height: 100%;
+      }
+      .main {
+        background-color: tan;
+        margin: 0 200px;
+        height: 100%;
+      }
+      .container1 {
+        height: 100px;
+        display: flex;
+      }
+      .left1 {
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+      }
+      .right1 {
+        width: 200px;
+        background-color: coral;
+        height: 100%;
+      }
+      .main1 {
+        flex: 1;
+        background-color: tan;
+        height: 100%;
+      }
+      .container2 {
+        height: 100px;
+        position: relative;
+      }
+      .left2 {
+        width: 200px;
+        background-color: bisque;
+        height: 100%;
+        position: absolute;
+        left: 0;
+      }
+      .right2 {
+        width: 200px;
+        background-color: coral;
+        height: 100%;
+        position: absolute;
+        right: 0;
+      }
+      .main2 {
+        margin: 0 200px;
+        background-color: tan;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="main"></div>
+    </div>
+    <div class="container1">
+      <div class="left1"></div>
+      <div class="main1"></div>
+      <div class="right1"></div>
+    </div>
+    <div class="container2">
+      <div class="left2"></div>
+      <div class="right2"></div>
+      <div class="main2"></div>
+    </div>
+  </body>
+</html>
