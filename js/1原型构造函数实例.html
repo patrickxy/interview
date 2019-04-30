@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>原型、构造函数、实例</title>
+  </head>
+  <body>
+    <img
+      width="500"
+      src="https://user-gold-cdn.xitu.io/2019/2/14/168e9d9b940c4c6f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
+    />
+  </body>
+  <script>
+    // 构造函数
+    function Person(name, age) {
+      this.name = name
+      this.age = age
+    }
+    // 实例
+    let person1 = new Person('张三', 25)
+    console.log(person1.__proto__) //{constructor: ƒ}
+    console.log(Person.__proto__) //ƒ () { [native code] }
+    console.log(Person.prototype) //{constructor: ƒ}
+    console.log(person1.constructor) //ƒ Person(name, age) {this.name = namethis.age = age}
+  </script>
+</html>
