@@ -16,18 +16,32 @@
     </style>
   </head>
   <body>
-    <div class="container"></div>
+    <div class="container">
+      <p>
+        防抖
+        事件触发完成后一段时间在执行（只有在任务触发的间隔大于等于指定的间隔时间，任务才会被执行）
+      </p>
+      <p>
+        节流 事件触发每隔一段时间执行一次 （任务在指定的间隔时间内只执行一次）
+      </p>
+    </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   </body>
   <script>
     $(document).scroll(debounce(()=>{
       console.log('debounce')
     },300))
+    $(document).scroll(throttle(()=>{
+      console.log('throttle')
+    },300))
     // 防抖 debounce
-    function debounce(fn,await) {
+    function debounce(fn,await,immediate) {
       let timer = null
-      console.log(timer)
       return function() {
+        // if(immediate){
+        //   fn.apply(this,arguments)
+        //   immediate = false
+        // }
         if (timer) {
           clearTimeout(timer)
         }
@@ -36,8 +50,20 @@
         },await)
       }
     }
-    function throttle(fn,await){
-
+    function throttle(fn,await,immediate){
+      let timer = null;
+      return function(){
+        // if(immediate){
+        //   fn.apply(this,arguments)
+        //   immediate = false
+        // }
+          if(!timer){
+            timer = setTimeout(()=>{
+            fn.apply(this,arguments)
+            timer = null
+          },await)
+        }
+      }
     }
   </script>
 </html>
