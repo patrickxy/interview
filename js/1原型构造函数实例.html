@@ -5,11 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>原型、构造函数、实例</title>
+    <style>
+      body {
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
+    <p>
+      js里所有的对象都有proto属性(对象，函数)，指向构造该对象的构造函数的原型
+    </p>
+    <p>
+      只有函数function才具有prototype属性。这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）
+    </p>
+    <p>
+      原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。
+    </p>
     <img
       width="500"
       src="https://user-gold-cdn.xitu.io/2019/2/14/168e9d9b940c4c6f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
+    />
+    <img
+      src="https://upload-images.jianshu.io/upload_images/6264932-e589472e4f3f6d32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/779/format/webp"
+      alt=""
     />
   </body>
   <script>
@@ -20,9 +38,8 @@
     }
     // 实例
     let person1 = new Person('张三', 25)
-    console.log(person1.__proto__) //{constructor: ƒ}
-    console.log(Person.__proto__) //ƒ () { [native code] }
     console.log(Person.prototype) //{constructor: ƒ}
+    console.log(person1.__proto__) //{constructor: ƒ} 指向原型的构造函数
     console.log(person1.constructor) //ƒ Person(name, age) {this.name = namethis.age = age}
   </script>
 </html>
