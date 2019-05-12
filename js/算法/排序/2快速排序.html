@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>快速排序</title>
+  </head>
+  <body>
+    <img
+      width="500"
+      src="https://images2018.cnblogs.com/blog/849589/201804/849589-20180402133438219-1946132192.png"
+    />
+    <p>
+      快速排序是对冒泡排序的一种改进，第一趟排序时将数据分成两部分，一部分比另一部分的所有数据都要小。然后递归调用，在两边都实行快速排序。(时间复杂度
+      O(nlogn) 空间复杂度 O(nlogn) 不稳定)
+    </p>
+    <script>
+      // 从小到大
+      let arr = [3, 5, 8, 1, 6, 0]
+      function quickSort(arr) {
+        if (arr.length < 2) return arr
+        let midPos = Math.ceil(arr / 2)
+        let midVal = arr.splice(midPos, 1)[0]
+        let left = []
+        let right = []
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] < midVal) {
+            left.push(arr[i])
+          } else {
+            right.push(arr[i])
+          }
+        }
+        return quickSort(left).concat(midVal, quickSort(right))
+      }
+      console.log(quickSort(arr))
+    </script>
+  </body>
+</html>

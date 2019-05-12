@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>对象拷贝</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 5000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul>
+        <li>
+          浅拷贝：复制的是指针
+          以赋值的形式拷贝引用对象，仍指向同一个地址，修改时原对象也会受到影响
+          <ul>
+            <li>直接用= 赋值</li>
+            <li>Object.assign</li>
+            <li>展开运算符(...)</li>
+          </ul>
+        </li>
+        <li>
+          深拷贝：复制成一个完全不同的对象（完全拷贝一个新对象，修改时原对象不再受到任何影响）
+          <ul>
+            <li>
+              Json.parse(JSON.stringify(obj)) 性能最快
+              <ul>
+                <li>具有循环引用的对象时，报错</li>
+                <li>当值为函数、undefined、或symbol时，无法拷贝</li>
+              </ul>
+            </li>
+            <li>
+              递归调用逐一赋值
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  </body>
+  <script>
+    function New(F) {
+      var obj = {
+        __proto__: F.prototype
+      } /*第一步 新生成了一个对象 新对象隐式原型链接到函数原型*/
+      return function() {
+        F.apply(obj, arguments) /*第二步 调用函数绑定this*/
+        return obj /*第三步 返回新对象*/
+      }
+    }
+    function Person(name, age) {
+      this.name = name
+      this.age = age
+    }
+    Person.prototype.introduce = function() {
+      console.log('dgdsf')
+    }
+    let person2 = New(Person)('张三', '20')
+    console.log(person2.name)
+    console.log(person2.age)
+    console.log(person2.introduce())
+  </script>
+</html>

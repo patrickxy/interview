@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>冒泡排序</title>
+  </head>
+  <body>
+    <img
+      src="https://images2018.cnblogs.com/blog/849589/201804/849589-20180402133438219-1946132192.png"
+    />
+    <ul>
+      <li>比较相邻的元素。如果第一个比第二个大，就交换它们两个；</li>
+      <li>
+        对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；
+      </li>
+      <li>针对所有的元素重复以上的步骤，除了最后一个；</li>
+      <li>重复步骤1~3，直到排序完成。</li>
+    </ul>
+    <p>时间复杂度 O(n2) 空间复杂度（O(1)）</p>
+    <script>
+      // 从小到大 每一个内层循环把最大值放到最后一个元素
+      let arr = [3, 5, 8, 1, 6, 0]
+      function buddleSort(arr) {
+        let len = arr.length
+        for (let i = 0; i < len; i++) {
+          for (let j = 0; j < len - i - 1; j++) {
+            //还要减1的原因是要跟他下一个数字比较
+            if (arr[j] > arr[j + 1]) {
+              let temp = arr[j]
+              arr[j] = arr[j + 1]
+              arr[j + 1] = temp
+            }
+          }
+        }
+        console.log(arr)
+      }
+      buddleSort(arr)
+      // 错误 每次循环找到剩余元素中最大的一个 换大a[i]
+      function chooseSort(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = i + 1; j < arr.length - 1; j++) {
+            if (arr[i] < arr[j]) {
+              let temp = arr[i]
+              arr[i] = arr[j]
+              arr[j] = temp
+            }
+          }
+        }
+        console.log(arr)
+        return arr
+      }
+      chooseSort(arr)
+    </script>
+  </body>
+</html>

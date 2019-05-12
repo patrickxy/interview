@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>New Object</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 5000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>
+        new操作的执行过程
+      </p>
+      <ul>
+        <li>新生成了一个对象</li>
+        <li>新对象隐式原型链接到函数原型</li>
+        <li>调用函数绑定this</li>
+        <li>返回新对象</li>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  </body>
+  <script>
+    function New(F) {
+      var obj = {
+        __proto__: F.prototype
+      } /*第一步 新生成了一个对象 新对象隐式原型链接到函数原型*/
+      return function() {
+        F.apply(obj, arguments) /*第二步 调用函数绑定this*/
+        return obj /*第三步 返回新对象*/
+      }
+    }
+    function Person(name, age) {
+      this.name = name
+      this.age = age
+    }
+    Person.prototype.introduce = function() {
+      console.log('dgdsf')
+    }
+    let person2 = New(Person)('张三', '20')
+    console.log(person2.name)
+    console.log(person2.age)
+    console.log(person2.introduce())
+  </script>
+</html>

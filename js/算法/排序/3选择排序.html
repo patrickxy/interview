@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>选择排序</title>
+  </head>
+  <body>
+    <p>
+      n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。具体算法描述如下：
+      <ul>
+          <li>初始状态：无序区为R[1..n]，有序区为空；</li>
+          <li>
+            第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中-选出关键字最小的记录R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；
+          </li>
+    
+          <li>n-1趟结束，数组有序化了。</li>
+      </ul>
+    </p>
+    <script>
+      // 每次内层循环找最大的数 记录位置 跟第i个元素交换
+      let arr = [3, 5, 8, 1, 6, 0]
+      function chooseSort(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          let tempIndex = i
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[tempIndex]) {
+              tempIndex = j
+            }
+          }
+          // if (tempIndex != i) {
+          let temp = arr[tempIndex]
+          arr[tempIndex] = arr[i]
+          arr[i] = temp
+          // }
+        }
+        console.log(arr)
+        return arr
+      }
+      chooseSort(arr)
+    </script>
+  </body>
+</html>

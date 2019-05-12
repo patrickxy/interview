@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>插入排序</title>
+  </head>
+  <body>
+    <p>
+      一般来说，插入排序都采用in-place在数组上实现。具体算法描述如下：
+    </p>
+    <ul>
+      <li>从第一个元素开始，该元素可以认为已经被排序；</li>
+      <li>取出下一个元素，在已经排序的元素序列中从后向前扫描；</li>
+      <li>如果该元素（已排序）大于新元素，将该元素移到下一位置；</li>
+      <li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；</li>
+      <li>将新元素插入到该位置后；</li>
+      <li>重复步骤2~5。</li>
+    </ul>
+    <script>
+      // 错误 每次循环找到剩余元素中最大的一个 换大a[i]
+      let arr = [3, 5, 8, 1, 6, 0]
+      function chooseSort(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = i + 1; j < arr.length - 1; j++) {
+            if (arr[i] < arr[j]) {
+              let temp = arr[i]
+              arr[i] = arr[j]
+              arr[j] = temp
+            }
+          }
+        }
+        console.log(arr)
+        return arr
+      }
+      chooseSort(arr)
+    </script>
+  </body>
+</html>
