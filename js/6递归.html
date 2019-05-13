@@ -18,21 +18,79 @@
   <body>
     <div class="container">
       <p>函数调用自身直至得到返回</p>
+      <p>
+        在递归调用的过程当中系统为每一层的返回点、局部量等开辟了栈来存储，因此递归次数过多容易造成栈溢出
+      </p>
+      <p>
+        尾部递归是一种编程技巧。如果在递归函数中，递归调用返回的结果总被直接返回，则称为尾部递归。尾部递归的函数有助将算法转化成函数编程语言，而且从编译器角度来说，亦容易优化成为普通循环
+      </p>
+      <p>arguments.callee 指向正在执行的函数的指针</p>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   </body>
   <script>
-    function fenq(n) {
-      if (n == 2) {
+    // 例子1 阶乘  返回一个函数如果在赋值后修改会受影响
+    // var anotherFactorial = factorial
+    // anotherFactorial = null
+    // alert(anotherFactorial(4)) 报错
+    function factorial(n) {
+      if (n <= 1) {
         return 1
+      } else {
+        return n * factorial(n - 1)
       }
-      if (n == 1) {
-        return 0
+    }
+    // 阶乘优化1  但是严格模式会报错
+    function factorial1(n) {
+      if (n <= 1) {
+        return 1
+      } else {
+        return n * arguments.callee(n - 1)
+      }
+    }
+    // 阶乘优化2 使用命名函数表达式
+    var factorial2 = function f(n) {
+      if (n <= 1) {
+        return 1
+      } else {
+        return n * f(n - 1)
+      }
+    }
+    console.log(factorial2(5))
+    // 阶乘优化3 尾递归
+    function factorial3(n, total) {
+      if (n <= 1) {
+        return total
+      } else {
+        return factorial3(n - 1, n * total)
+      }
+    }
+    console.log(factorial3(5, 1))
+
+    // 斐波那契从 f(0) = 0开始
+    // 斐波那契 2的n次方指数性增长 O(n2)
+    function fenq(n) {
+      if (n <= 2) {
+        return 1
       }
       return fenq(n - 1) + fenq(n - 2)
     }
-    console.log(fenq(40)) //63245986
-    // 优化-》 尾递归
-    function fbnq1(n) {}
+    console.log(fenq(10)) //63245986 保存n调记录，复杂程度要吐血
+    console.log(fenq(3)) //63245986 保存n调记录，复杂程度要吐血
+    console.log(fenq(4)) //63245986 保存n调记录，复杂程度要吐血
+    // 优化1 循环实现O(n)
+    // 优化2 尾递归 只保存一个记录 线性增长O(n)
+    function fbnq1(n, ppre, pre) {
+      if (n < 2) {
+        // why n到0才结束 ppre到1 也就是说n=2是还需要递归
+        return ppre
+      } else {
+        return fbnq1(n - 1, pre, ppre + pre)
+      }
+    }
+    console.log(fbnq1(10, 1, 1))
+    console.log(fbnq1(5, 1, 1))
+    console.log(fbnq2(10, 1, 1))
+    console.log(fbnq2(5, 1, 1))
   </script>
 </html>
