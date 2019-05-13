@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>闭包</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 5000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>
+        父函数被销毁的情况下，返回出的子函数的[[scope]]中仍然保留着父级的单变量对象和作用域链，
+        因此可以继续访问到父级的变量对象，这样的函数称为闭包。
+      </p>
+      <h5>解决方案</h5>
+      <ul>
+        <li>
+          变量可以通过 函数参数的形式
+          传入，避免使用默认的[[scope]]向上查找(闭包)
+        </li>
+        <li>使用setTimeout包裹，通过第三个参数传入</li>
+        <li>使用 块级作用域let，让变量成为自己上下文的属性，避免共享</li>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  </body>
+  <script>
+    // var arr = []
+    // for (var i = 0; i < 10; i++) {
+    //   arr[i] = function() {
+    //     console.log(i)
+    //   }
+    // }
+    // arr[5]() //10
+
+    // for (var h = 0; h < 5; h++) {
+    //   setTimeout(() => {
+    //     console.log(h)
+    //   }, h * 1000)
+    // }
+    //一次打印10个10
+    // 方案1
+    // var arr1 = []
+    // for (var j = 0; j < 10; j++) {
+    //   ;(function(k) {
+    //     arr1[j] = function() {
+    //       console.log(k)
+    //     }
+    //   })(j)
+    // }
+    // arr1[5]()
+
+    // 方案2
+    // var arr2 = []
+    // for (var m = 0; m < 10; m++) {
+    //   setTimeout(
+    //     j => {
+    //       console.log(j)
+    //     },
+    //     m * 1000,
+    //     m
+    //   )
+    // }
+    // 方案3 let
+    for (let n = 0; n < 10; n++) {
+      setTimeout(() => {
+        console.log(n)
+      }, n * 1000)
+    }
+  </script>
+</html>
