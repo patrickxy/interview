@@ -29,5 +29,25 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   </body>
-  <script></script>
+  <script>
+    // apply call 应用实例
+    //1.数组追加数据
+    let a = [1]
+    let b = [2]
+    let c = [3]
+    Array.prototype.push.apply(a, b)
+    console.log(a) //[1,2]
+    Array.prototype.push.call(a, ...c)
+    console.log(a) //[1,2,3]
+    // 2.获取最大值
+    let arr = [3, 4, 6, 2]
+    let d = Math.max.apply(Math, arr)
+    console.log(d)
+    // 3.判断是否是array
+    function isArrayFunc(obj) {
+      console.log(Object.prototype.toString.call(obj))
+      return Object.prototype.toString.call(obj) === '[object array]'
+    }
+    isArrayFunc(isArrayFunc)
+  </script>
 </html>
