@@ -136,29 +136,5 @@
     }
     let son = parent.myBind(Son, '男') //男 张三
     son('asfd')
-
-    // 多次bind的问题
-    var one = function() {
-      console.log(this.x)
-    }
-    var two = {
-      x: 1
-    }
-    var three = {
-      x: 2
-    }
-    var fn = one.bind(two).bind(three)
-    fn() //?1
-
-    var four = {
-      x: 3
-    }
-    var fn = one
-      .bind(two)
-      .bind(three)
-      .bind(four)
-    fn() //? 1
-    //  bind() 的实现，相当于使用函数在内部包了一个 call / apply ，第二次 bind() 相当于再包住第一次 bind() ,故第二次以后的 bind 是无法生效的
-    // 目标函数和this是被固定，只有参数列表会叠加
   </script>
 </html>
