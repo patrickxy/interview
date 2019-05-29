@@ -21,6 +21,15 @@
     <p>
       原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。
     </p>
+    <ul>
+      <li>实例的__proto__指向原型 实例的constructor指向构造函数</li>
+      <li>
+        函数的prototype指向
+        调用构造函数而创建的那个对象实例的原型对象（可以共享他所包含的所有属性和方法）
+      </li>
+      <li>原型的contructor也指向构造函数</li>
+      <li>constructor中包含scopes 即是原型链</li>
+    </ul>
     <img
       width="500"
       src="https://user-gold-cdn.xitu.io/2019/2/14/168e9d9b940c4c6f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1"
@@ -38,8 +47,10 @@
     }
     // 实例
     let person1 = new Person('张三', 25)
-    console.log(Person.prototype) //{constructor: ƒ}
-    console.log(person1.__proto__) //{constructor: ƒ} 指向原型的构造函数
-    console.log(person1.constructor) //ƒ Person(name, age) {this.name = namethis.age = age}
+    console.log(Person.prototype) //{constructor: ƒ} //函数的prototype指向调用构造函数而创建的那个对象实例的原型对象
+    console.log(person1.__proto__) //{constructor: ƒ}//实例的__proto__也指向原型对象
+    console.log(person1.__proto__.constructor) //{constructor: ƒ}//实例的__proto__也指向原型对象
+    // 原型的contructor指向构造函数
+    console.log(person1.constructor) //ƒ Person(name, age) {this.name = namethis.age = age} 实例的constructor指向构造函数
   </script>
 </html>

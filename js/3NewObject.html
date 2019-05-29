@@ -35,8 +35,12 @@
         __proto__: F.prototype
       } /*第一步 新生成了一个对象 新对象隐式原型链接到函数原型*/
       return function() {
-        F.apply(obj, arguments) /*第二步 调用函数绑定this*/
-        return obj /*第三步 返回新对象*/
+        F.apply(
+          obj,
+          arguments
+        ) /*第二步 调用函数绑定this this 指向新的对象 将构造函数的作用域赋给新对象 */
+        // 第三部 指向构造函数中的代码  为新对象添加属性
+        return obj /*第四步 返回新对象*/
       }
     }
     function Person(name, age) {
