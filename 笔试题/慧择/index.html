@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1
+      var car = null
+      console.log(typeof car) //object
+      // 2
+      console.log(Number(''), parseInt('')) //0 NAN
+      // 3
+      if (!('a' in window)) {
+        var a = 1
+      }
+      function value() {
+        return 1
+      }
+      var value //不定义的话 不会覆盖
+      console.log(a, typeof value) //undefined "function"
+
+      // 4
+      var y
+      function test() {
+        var y = 'global'
+        function fn() {
+          var y = 'local'
+          return new Function('return y')
+        }
+        alert(fn()())
+      }
+      test() //undefined
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>贪心算法解决最少硬币找零的问题</title>
+  </head>
+  <body>
+    <p>寻找局部最优解 期望达到全局最优解</p>
+    <script>
+      function minCoinChange(coins, amount) {
+        const change = []
+        let total = 0
+        for (let i = coins.length; i >= 0; i--) {
+          // {1}
+          const coin = coins[i]
+
+          // 如果加最大的coin一直小于最大值 就循环一直加  如9-4  4+4
+          while (total + coin <= amount) {
+            // {2}
+            change.push(coin) // {3}
+            total += coin // {4}
+          }
+        }
+        return change
+      }
+      console.log(minCoinChange([1, 2, 3, 4], 6)) //42 实际最优解是33
+      console.log(minCoinChange([1, 3, 4], 6)) //411实际最优解是33
+    </script>
+  </body>
+</html>

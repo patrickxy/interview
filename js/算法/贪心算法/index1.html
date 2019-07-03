@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>贪心算法解决分数背包的问题</title>
+  </head>
+  <body>
+    <p>寻找局部最优解 期望达到全局最优解</p>
+    <pre>
+        console.log(knapSack(6, [2, 3, 4], [3, 4, 5])) //8.25
+        console.log(knapSack(6, [4, 3, 2], [5, 4, 3])) //7.66666
+    </pre>
+    <p>
+      这两种传值方式导致结果不一致，可以考虑先按权重（value/weight
+      即性价比）进行重大到小排序
+    </p>
+    <p>然后传入参数执行方法</p>
+    <script>
+      function knapSack(capacity, weights, values) {
+        const n = values.length
+        let load = 0
+        let val = 0
+        for (let i = 0; i < n && load < capacity; i++) {
+          // {1}
+          if (weights[i] <= capacity - load) {
+            // {2}
+            val += values[i]
+            load += weights[i]
+            console.log(load)
+          } else {
+            const r = (capacity - load) / weights[i] // {3}
+            val += r * values[i]
+            load += weights[i]
+          }
+        }
+        return val
+      }
+      console.log(knapSack(6, [2, 3, 4], [3, 4, 5])) //8.25
+      console.log(knapSack(6, [4, 3, 2], [5, 4, 3])) //7.66666
+    </script>
+  </body>
+</html>

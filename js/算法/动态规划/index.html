@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>动态规划之最小硬币找零</title>
+  </head>
+
+  <body>
+    <ul>
+      <li>定义子问题</li>
+      <li>解决子问题</li>
+      <li>识别并求解出极限条件</li>
+    </ul>
+    <p>能用动态规划解决的问题有</p>
+    <ul>
+      <li>背包问题</li>
+      <li>最长公共子序列</li>
+      <li>矩阵链相乘</li>
+      <li>硬币找零</li>
+      <li>图的全源最短路径</li>
+    </ul>
+    <p>https://juejin.im/post/5b0a8e0f51882538b2592963#heading-2</p>
+    <p>https://www.cnblogs.com/muamaker/p/9284350.html</p>
+    <script>
+      // 最小硬币找零 coins 面额 amount 总数
+      function minCoinChange(coins, amount) {
+        const cache = [] // 记忆化 缓存已计算的值
+        const makeChange = value => {
+          // {2} 传入amount 递归计算
+          if (!value) {
+            // {3} 若 amount 不为正（ < 0 ），就返回空数组（行 {3} ）
+            return []
+          }
+          if (cache[value]) {
+            // {4} 检查 cache 缓存。若结果已缓存（行 {4} ），则直接返回结果；否则，执行算法
+            return cache[value]
+          }
+          let min = []
+          let newMin
+          let newAmount
+          // 对每个面额（行 {5} ），
+          // 我们都计算 newAmount （行 {6} ）的值，它的值会一直减小，直到能找零的最小钱数（别忘了本
+          // 算法对所有的 x < amount 都会计算 makeChange 结果）。若 newAmount 是合理的值（正值），
+          // 我们也会计算它的找零结果（行 {7} ）
+          for (let i = 0; i < coins.length; i++) {
+            // {5}
+            const coin = coins[i]
+            newAmount = value - coin // {6}
+            console.log('I' + i)
+            console.log('newMount' + newAmount)
+            if (newAmount >= 0) {
+              newMin = makeChange(newAmount) // {7}
+            }
+
+            // 判断 newAmount 是否有效， minValue （最少硬币数）是否是最优解，与此同
+            // 时 minValue 和 newAmount 是否是合理的值（行 {10} ）
+            if (
+              newAmount >= 0 && // {8}
+              (newMin.length < min.length - 1 || !min.length) && // {9}//获取到的组合长度小于当前组合，或者当前组合为空
+              (newMin.length || !newAmount) // {10}//获取到的组合有值或者差值为0==
+            ) {
+              min = [coin].concat(newMin) // {11}
+              console.log('new Min ' + min + ' for ' + amount)
+            }
+          }
+          return (cache[value] = min) // {12}
+        }
+        return makeChange(amount) // {13}
+      }
+      // console.log(minCoinChange([1, 10, 25], 36))
+      console.log(minCoinChange([2, 3, 5], 6))
+    </script>
+  </body>
+</html>

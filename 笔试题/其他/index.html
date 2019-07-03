@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>洗牌算法</title>
+  </head>
+  <body>
+    <script>
+      // shuffle
+      let a = [1, 2, 3, 4, 5]
+      function shuffle1(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const randomIndex = Math.floor(Math.random() * (i + 1))
+          // swap(array, i, randomIndex)
+          ;[array[i], array[randomIndex]] = [array[randomIndex], array[i]]
+        }
+        return array
+      }
+      shuffle1(a)
+      // a.sort(function(a, b) {
+      //   return Math.random() > 0.5 ? -1 : 1
+      // })
+      console.log(a)
+    </script>
+  </body>
+</html>
